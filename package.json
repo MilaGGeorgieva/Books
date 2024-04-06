@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start" : "node server.js"
+    "start" : "node server.js",
+    "test-api": "npx mocha api.test.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
