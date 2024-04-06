@@ -75,4 +75,35 @@ describe('Books API', () => {
                 done();
             });
     });
+
+    it('should return 404 when trying to GET, PUT or DELETE a non-existing book', (done) => {
+        chai.request(server)
+            .get('/books/9999')
+            .end((err, resp) => {
+                if (err) {
+                    return done(err)
+                }
+                expect(resp.statusCode).to.equal(404);                
+            });
+
+        chai.request(server)
+            .put('/books/9999')
+            .send({ id: "9999", title: "Non-existing mystery", author: "Non-existing author" })
+            .end((err, resp) => {
+                if (err) {
+                    return done(err)
+                }
+                expect(resp.statusCode).to.equal(404);
+            });
+
+        chai.request(server)
+            .delete('/books/9999')
+            .end((err, resp) => {
+                if (err) {
+                    return done(err)
+                }
+                expect(resp.statusCode).to.equal(404);
+                done();
+            });
+    });
 })
